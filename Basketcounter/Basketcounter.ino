@@ -4,6 +4,9 @@
 
 int team1;
 int team2;
+
+int state = 0; // 0 = startup; 1 = - ;2 = gameover;
+
 const int buttonPinP1T1 = 2;
 const int buttonPinP2T1 = 3;
 const int buttonPinP3T1 = 4;
@@ -105,7 +108,6 @@ void loop() {
       team2 += 2;
     }
   }
-
   if (buttonP3T2.released()) {
     if ((millis() - P3T2Time) > holdTime) {
       team2 -= 3;

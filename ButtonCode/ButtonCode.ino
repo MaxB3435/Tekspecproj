@@ -1,11 +1,9 @@
-#include <Wire.h>
 #include <Button.h>
 //https://github.com/madleech/Button/blob/master/README.md
-// https://docs.arduino.cc/learn/communication/wire/
 
 
-byte team1;
-byte team2;
+int team1;
+int team2;
 
 int state = 0;  // 0 = startup; 1 = - ;2 = gameover;
 
@@ -40,7 +38,6 @@ Button buttonP3T2(buttonPinP3T2);
 
 
 void setup() {
-  Wire.begin();
   buttonP1T1.begin();
   buttonP2T1.begin();
   buttonP3T1.begin();
@@ -119,11 +116,7 @@ void loop() {
     }
   }
 
+
   Serial.println(team1);
   //Serial.println(team2);
-  Wire.beginTransmission(1);
-  Wire.write(team1);    
-  Wire.write(team2);    
-  Wire.endTransmission(); 
-
 }

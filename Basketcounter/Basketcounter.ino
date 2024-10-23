@@ -18,6 +18,9 @@ const int buttonPinP2T2 = 7;
 const int buttonPinP3T2 = 8;
 
 unsigned long holdTime = 400;
+// timing variables
+unsigned long prevUpdateTime = 0;
+unsigned long updateInterval = 500;
 
 
 
@@ -121,9 +124,11 @@ void loop() {
 
   Serial.println(team1);
   //Serial.println(team2);
-  Wire.beginTransmission(1);
-  Wire.write(team1);    
-  Wire.write(team2);    
-  Wire.endTransmission(); 
-
+  if (millis() - prevUpdateTime >= updateInterval) {
+    prevUpdateTime = millis();
+    Wire.beginTransmission(1);
+    Wire.write(team1);
+    //Wire.write(team2);
+    Wire.endTransmission();
+  }
 }

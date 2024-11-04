@@ -62,6 +62,7 @@ void loop() {
 
     } else if (timeLeft == 0) {
       myDisplay.displayText("slut", PA_CENTER, 0, 0, PA_PRINT, PA_NO_EFFECT);
+        
     }
   }
 

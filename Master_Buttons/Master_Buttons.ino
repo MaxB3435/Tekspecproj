@@ -24,7 +24,7 @@ unsigned long previousMillis = 0;
 unsigned long holdTime = 650;
 unsigned long prevUpdateTime = 0;
 unsigned long interval = 1000;
-short timeLeft = 3000;
+short timeLeft = 610;
 
 byte timeH;  // 2^8
 byte timeL;  // 2^0

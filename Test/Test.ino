@@ -5,7 +5,7 @@
 
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 4
-#define CS_PIN 10
+#define CS_PIN 12
 
 MD_Parola myDisplay = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
 
@@ -62,6 +62,7 @@ void loop() {
 
     } else if (timeLeft == 0) {
       myDisplay.displayText("slut", PA_CENTER, 0, 0, PA_PRINT, PA_NO_EFFECT);
+        
     }
   }
 

@@ -63,7 +63,7 @@ void setup() {
   buttonP3T1.begin();
 
   buttontime.begin();
-  
+
   buttonP1T2.begin();
   buttonP2T2.begin();
   buttonP3T2.begin();
@@ -79,6 +79,10 @@ void loop() {
   timeH = (timeLeft - (timeLeft % 256)) / 256;
   timeL = timeLeft % 256;
 
+  sendCode();
+}
+
+void sendCode() {
   if (millis() - prevUpdateTime >= updateInterval) {
     prevUpdateTime = millis();
     Wire.beginTransmission(1);
@@ -89,7 +93,6 @@ void loop() {
     Wire.endTransmission();
   }
 }
-
 
 void buttonUpdate() {
   if (buttonP1T1.pressed()) {

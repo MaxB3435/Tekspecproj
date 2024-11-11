@@ -13,12 +13,14 @@ const int buttonPinP1T1 = 2;
 const int buttonPinP2T1 = 3;
 const int buttonPinP3T1 = 4;
 
+const int buttonPinTime = 5;
+
 const int buttonPinP1T2 = 6;
 const int buttonPinP2T2 = 7;
 const int buttonPinP3T2 = 8;
 
 
-const int buttonPinTime = 5;
+
 
 unsigned long previousMillis = 0;
 unsigned long holdTime = 650;
@@ -60,17 +62,36 @@ void setup() {
   buttonP2T1.begin();
   buttonP3T1.begin();
 
+  buttontime.begin();
+  
   buttonP1T2.begin();
   buttonP2T2.begin();
   buttonP3T2.begin();
 
-  buttontime.begin();
+
 
   Serial.begin(9600);
 }
 
 void loop() {
+  buttonUpdate();
 
+  timeH = (timeLeft - (timeLeft % 256)) / 256;
+  timeL = timeLeft % 256;
+
+  if (millis() - prevUpdateTime >= updateInterval) {
+    prevUpdateTime = millis();
+    Wire.beginTransmission(1);
+    Wire.write(timeH);
+    Wire.write(timeL);
+    Wire.write(team1);
+    Wire.write(team2);
+    Wire.endTransmission();
+  }
+}
+
+
+void buttonUpdate() {
   if (buttonP1T1.pressed()) {
     P1T1Time = millis();
   }
@@ -151,27 +172,5 @@ void loop() {
       previousMillis = currentMillis;
       timeLeft--;
     }
-  }
-
-  timeH = (timeLeft - (timeLeft % 256))/256;
-  timeL = timeLeft % 256; 
-
-
-
-  //Serial.println(team1);
-  //Serial.println(team2);
-  //Serial.println(timeLeft);
-  Serial.println(timeL);
-
-
-
-  if (millis() - prevUpdateTime >= updateInterval) {
-    prevUpdateTime = millis();
-    Wire.beginTransmission(1);
-    Wire.write(timeH);
-    Wire.write(timeL);
-    Wire.write(team1);
-    Wire.write(team2);
-    Wire.endTransmission();
   }
 }

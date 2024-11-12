@@ -118,45 +118,93 @@ void buttonUpdate() {
 
   if (buttonP1T1.released()) {
     if ((millis() - P1T1Time) > holdTime) {
-      team1 -= 1;
+      if (team1 == 0) {
+        team1 = team1;
+      } else {
+        team1 -= 1;
+      }
     } else {
-      team1 += 1;
+      if (team1 < 99) {
+        team1 += 1;
+      } else {
+        team1 = team1;
+      }
     }
   }
   if (buttonP2T1.released()) {
     if ((millis() - P2T1Time) > holdTime) {
-      team1 -= 2;
+      if (team1 <= 1) {
+        team1 = team1;
+      } else {
+        team1 -= 2;
+      }
     } else {
-      team1 += 2;
+      if (team1 < 98) {
+        team1 += 2;
+      } else {
+        team1 = team1;
+      }
     }
   }
   if (buttonP3T1.released()) {
     if ((millis() - P3T1Time) > holdTime) {
-      team1 -= 3;
+      if (team1 <= 2) {
+        team1 = team1;
+      } else {
+        team1 -= 3;
+      }
     } else {
-      team1 += 3;
+      if (team1 < 97) {
+        team1 += 3;
+      } else {
+        team1 = team1;
+      }
     }
   }
 
   if (buttonP1T2.released()) {
     if ((millis() - P1T2Time) > holdTime) {
-      team2 -= 1;
+      if (team2 == 0) {
+        team2 = team2;
+      } else {
+        team2 -= 1;
+      }
     } else {
-      team2 += 1;
+      if (team2 < 99) {
+        team2 += 1;
+      } else {
+        team2 = team2;
+      }
     }
   }
   if (buttonP2T2.released()) {
     if ((millis() - P2T2Time) > holdTime) {
-      team2 -= 2;
+      if (team2 <= 1) {
+        team2 = team2;
+      } else {
+        team2 -= 2;
+      }
     } else {
-      team2 += 2;
+      if (team2 < 98) {
+        team2 += 2;
+      } else {
+        team2 = team2;
+      }
     }
   }
   if (buttonP3T2.released()) {
     if ((millis() - P3T2Time) > holdTime) {
-      team2 -= 3;
+      if (team2 <= 2) {
+        team2 = team2;
+      } else {
+        team2 -= 3;
+      }
     } else {
-      team2 += 3;
+      if (team2 < 97) {
+        team2 += 3;
+      } else {
+        team2 = team2;
+      }
     }
   }
 

@@ -12,12 +12,12 @@
 
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 4
-#define CS_PIN2 12
-#define DATA_PIN2 6
-
+#define CS_PIN2 4
+#define DATA_PIN2 5
+#define CLK_PIN2 3
 
 MD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,DATA_PIN ,CLK_PIN, CS_PIN, MAX_DEVICES);
-MD_Parola myDisplay2 = MD_Parola(HARDWARE_TYPE,DATA_PIN2 ,CLK_PIN,  CS_PIN2, MAX_DEVICES);
+MD_Parola myDisplay2 = MD_Parola(HARDWARE_TYPE,DATA_PIN2 ,CLK_PIN2,  CS_PIN2, MAX_DEVICES);
 
 unsigned long previousMillis = 0;
 unsigned long prevUpdateTime = 0;

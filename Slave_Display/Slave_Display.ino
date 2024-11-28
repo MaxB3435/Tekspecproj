@@ -36,7 +36,7 @@ void setup() {
   myDisplay2.setIntensity(4);  // Sätt ljusstyrka
   myDisplay2.displayClear();   // Rensa displayen
 
-  Wire.begin(1);                 // join i2c bus with address #4
+  Wire.begin(1);                 // join i2c bus with address #1
   Wire.onReceive(receiveEvent);  // register event
   Serial.begin(9600);            // start serial for output
 }
@@ -67,6 +67,7 @@ void loop() {
     sprintf(timeBuffer, "%02d:%02d", minutes, seconds);
     myDisplay2.displayText(timeBuffer, PA_CENTER, 0, 0, PA_PRINT, PA_NO_EFFECT);
     myDisplay2.displayAnimate();
+    Serial.println(timeBuffer);
   }
 }
 

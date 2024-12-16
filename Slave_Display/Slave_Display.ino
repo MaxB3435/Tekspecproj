@@ -27,6 +27,16 @@ char scoreBuffer1[10];
 char scoreBuffer2[10];
 char timeBuffer[6];
 
+int Points1;
+int Points2;
+int time;
+byte timeH;
+byte timeL;
+
+byte state;
+
+
+
 void setup() {
   myDisplay.begin();
   myDisplay.setIntensity(4);  // Sätt ljusstyrka
@@ -40,11 +50,7 @@ void setup() {
   Wire.onReceive(receiveEvent);  // register event
   Serial.begin(9600);            // start serial for output
 }
-int Points1;
-int Points2;
-int time;
-byte timeH;
-byte timeL;
+
 
 
 void loop() {
@@ -72,6 +78,9 @@ void loop() {
 }
 
 void receiveEvent(int howMany) {
+  while (4 < Wire.available()) {
+    state = Wire.read();
+  }
   while (3 < Wire.available()) {
     timeH = Wire.read();
   }

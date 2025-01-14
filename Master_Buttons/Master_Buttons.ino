@@ -87,6 +87,9 @@ void loop() {
       previousMillis = currentMillis;
       timeLeft--;
     }
+
+    state = 1;
+
   }
 
   timeH = (timeLeft - (timeLeft % 256)) / 256;
@@ -135,23 +138,32 @@ void buttonUpdate() {
 
   if (state == 0) {
     if (buttonP1T1.released()) {
-      if (timeLeft > 59) {
-        timeLeft -= 60;
+      if (timeLeft > 0) {
+
+        timeLeft -= 1;
+
       }
     }
     if (buttonP1T2.released()) {
-      if (timeLeft < 5940) {
-        timeLeft += 60;
+      if (timeLeft < 5999) {
+
+        timeLeft += 1;
+
       }
     }
     if (buttonP2T1.released()) {
-      if (timeLeft > 0) {
-        timeLeft -= 1;
+      if (timeLeft > 59) {
+
+        timeLeft -= 60;
+
       }
     }
     if (buttonP2T2.released()) {
-      if (timeLeft < 5999) {
-        timeLeft += 1;
+      if (timeLeft < 5940) {
+
+        timeLeft += 60;
+
+
       }
     }
     if (buttonP3T1.released()) {

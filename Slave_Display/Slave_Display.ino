@@ -7,17 +7,17 @@
 #define MAX_DEVICES 4
 #define CS_PIN 10
 #define DATA_PIN 11
-#define CLK_PIN 13
+#define CLK_PIN 9
 
 
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 4
-#define CS_PIN2 12
-#define DATA_PIN2 6
-
+#define CS_PIN2 4
+#define DATA_PIN2 5
+#define CLK_PIN2 3
 
 MD_Parola myDisplay = MD_Parola(HARDWARE_TYPE,DATA_PIN ,CLK_PIN, CS_PIN, MAX_DEVICES);
-MD_Parola myDisplay2 = MD_Parola(HARDWARE_TYPE,DATA_PIN2 ,CLK_PIN,  CS_PIN2, MAX_DEVICES);
+MD_Parola myDisplay2 = MD_Parola(HARDWARE_TYPE,DATA_PIN2 ,CLK_PIN2,  CS_PIN2, MAX_DEVICES);
 
 unsigned long previousMillis = 0;
 unsigned long prevUpdateTime = 0;
@@ -26,6 +26,16 @@ unsigned long interval = 1000;
 char scoreBuffer1[10];
 char scoreBuffer2[10];
 char timeBuffer[6];
+
+int Points1;
+int Points2;
+int time;
+byte timeH;
+byte timeL;
+
+byte state;
+
+
 
 void setup() {
   myDisplay.begin();
@@ -36,15 +46,11 @@ void setup() {
   myDisplay2.setIntensity(4);  // Sätt ljusstyrka
   myDisplay2.displayClear();   // Rensa displayen
 
-  Wire.begin(1);                 // join i2c bus with address #4
+  Wire.begin(1);                 // join i2c bus with address #1
   Wire.onReceive(receiveEvent);  // register event
   Serial.begin(9600);            // start serial for output
 }
-int Points1;
-int Points2;
-int time;
-byte timeH;
-byte timeL;
+
 
 
 void loop() {
@@ -67,10 +73,14 @@ void loop() {
     sprintf(timeBuffer, "%02d:%02d", minutes, seconds);
     myDisplay2.displayText(timeBuffer, PA_CENTER, 0, 0, PA_PRINT, PA_NO_EFFECT);
     myDisplay2.displayAnimate();
+    Serial.println(timeBuffer);
   }
 }
 
 void receiveEvent(int howMany) {
+  while (4 < Wire.available()) {
+    state = Wire.read();
+  }
   while (3 < Wire.available()) {
     timeH = Wire.read();
   }
